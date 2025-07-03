@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/var/www/html/todo/app/Mail/DailyNotification.php</file>
+            <file>file:/var/www/html/todo/resources/views/emails/daily.blade.php</file>
+            <file>file:/var/www/html/todo/app/Console/Commands/SendDailyEmail.php</file>
+            <file>file:/var/www/html/todo/routes/console.php</file>
+            <file>file:/var/www/html/todo/database/migrations/2025_06_29_082456_create_tasks_table.php</file>
+            <file>file:/var/www/html/todo/app/Models/Task.php</file>
+            <file>file:/var/www/html/todo/.env</file>
+            <file>file:/var/www/html/todo/app/Http/Controllers/Controller.php</file>
+            <file>file:/var/www/html/todo/app/Http/Controllers/ProfileController.php</file>
+            <file>file:/var/www/html/todo/app/Http/Controllers/TaskController.php</file>
+            <file>file:/var/www/html/todo/config/app.php</file>
+            <file>file:/var/www/html/todo/database/migrations/2025_06_29_080450_create_priorities_table.php</file>
+            <file>file:/var/www/html/todo/database/migrations/2025_06_29_081659_create_statuses_table.php</file>
+            <file>file:/var/www/html/todo/routes/web.php</file>
+            <file>file:/var/www/html/todo/resources/views/tasks/show.blade.php</file>
+        </group>
+    </open-files>
+</project-private>
