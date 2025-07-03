@@ -8,12 +8,16 @@ use App\Models\Priority;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
+
 class TaskController extends Controller {
 
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request) {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         $statuses = Status::all();
         $priorities = Priority::all();
 
@@ -44,6 +48,9 @@ class TaskController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         return view('tasks.create');
     }
 
@@ -51,6 +58,9 @@ class TaskController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
@@ -73,6 +83,9 @@ class TaskController extends Controller {
      * Display the specified resource.
      */
     public function show(Task $task) {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         if ($task->user_id !== Auth::id()) {
             abort(403, 'You are not authorized to view this record.');
         }
@@ -83,10 +96,13 @@ class TaskController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Task $task) {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         if ($task->user_id !== Auth::id()) {
             abort(403, 'You are not authorized to view this record.');
         }
-        
+
         $statuses = Status::all();
         $priorities = Priority::all();
         return view('tasks.edit', compact('task', 'statuses', 'priorities'));
@@ -96,7 +112,9 @@ class TaskController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, Task $task) {
-
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         if ($task->user_id !== Auth::id()) {
             abort(403, 'You are not authorized to view this record.');
         }
@@ -116,6 +134,9 @@ class TaskController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Task $task) {
+        if (!auth()->check()) {
+            abort(403, 'Unauthorized access');
+        }
         if ($task->user_id !== Auth::id()) {
             abort(403, 'You are not authorized to view this record.');
         }
