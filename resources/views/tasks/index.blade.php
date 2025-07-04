@@ -31,69 +31,68 @@
                                 @endauth
                             </div>
                             @if($tasks->count())
-                            <!-- User Table -->
-                            <div class="overflow-x-auto bg-white rounded-lg shadow">
-                                <table class="w-full table-auto">
-                                    <thead>
 
+                            <div class="p-4">
+
+                                <!-- Filters -->
+                                <div class="flex gap-4">
+                                    <div>
+                                        <form method="GET" action="{{ route('tasks.index') }}" class="flex items-center justify-center">
+                                            <label for="filter_due_date" class="">Filter by Due Date</label>
+                                            <input type="text" class="datepicker" name="filter_due_date" id="filter_due_date"" value="{{$selected_due_date}}" autocomplete="off">
+                                            <x-primary-button>{{ __('Filter') }}</x-primary-button>
+                                        </form>
+                                    </div>
+
+
+                                    <div>
+                                        <form method="GET" action="{{ route('tasks.index') }}" class="">
+                                            <label for="filter_status">Filter by Status:</label>
+                                            <select name="filter_status_id" id="filter_status_id" class="">
+                                                <option value=""{{ $selected_status == "" ? 'selected="' : '' }}>-- All --</option>
+                                                        @foreach($statuses as $s)
+                                                        <option value="{{ $s->id }}" {{ $selected_status == $s->id ? 'selected="' : '' }}">
+                                                    {{ $s->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            <x-primary-button>{{ __('Filter') }}</x-primary-button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form method="GET" action="{{ route('tasks.index') }}" class="flex items-center justify-center">
+                                            <label for="filter_priority">Filter by Priority:</label>
+                                            <select name="filter_priority_id" id="filter_priority_id" class="">
+                                                <option value=""{{ $selected_priority == "" ? 'selected="' : '' }}>-- All --</option>
+                                                        @foreach($priorities as $p)
+                                                        <option value="{{ $p->id }}" {{ $selected_priority == $p->id ? 'selected="' : '' }}>
+                                                    {{ $p->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            <x-primary-button>{{ __('Filter') }}</x-primary-button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Table -->
+                                <table class="w-full border border-gray-300 text-sm">
+                                    <thead class="bg-gray-100">
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th><!-- Filter Form -->
-                                                <form method="GET" action="{{ route('tasks.index') }}" class="">
-                                                    <label for="filter_due_date" class="">Filter by Due Date</label>
-                                                    <input type="text" class="datepicker" name="filter_due_date" id="filter_due_date"" value="{{$selected_due_date}}" autocomplete="off">
-                                                    <x-primary-button>{{ __('Filter') }}</x-primary-button>
-                                                </form>
-                                            </th>
-                                            <th><!-- Filter Form -->
-                                                <form method="GET" action="{{ route('tasks.index') }}" class="">
-                                                    <label for="filter_status">Filter by Status:</label>
-                                                    <select name="filter_status_id" id="filter_status_id" class="">
-                                                        <option value=""{{ $selected_status == "" ? 'selected="' : '' }}>-- All --</option>
-                                                                @foreach($statuses as $s)
-                                                                <option value="{{ $s->id }}" {{ $selected_status == $s->id ? 'selected="' : '' }}">
-                                                            {{ $s->name }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <x-primary-button>{{ __('Filter') }}</x-primary-button>
-                                                </form>
-                                            </th>
-                                            <th>
-                                                <form method="GET" action="{{ route('tasks.index') }}" class="">
-                                                    <label for="filter_priority">Filter by Priority:</label>
-                                                    <select name="filter_priority_id" id="filter_priority_id" class="">
-                                                        <option value=""{{ $selected_priority == "" ? 'selected="' : '' }}>-- All --</option>
-                                                                @foreach($priorities as $p)
-                                                                <option value="{{ $p->id }}" {{ $selected_priority == $p->id ? 'selected="' : '' }}>
-                                                            {{ $p->name }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <x-primary-button>{{ __('Filter') }}</x-primary-button>
-                                                </form>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-
-                                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                            <th class="py-3 px-6 text-left">Name</th>
-                                            <th class="py-3 px-6 text-left">Description</th>
-                                            <th class="py-3 px-6 text-left">Due date</th>
-                                            <th class="py-3 px-6 text-left">Status</th>
-                                            <th class="py-3 px-6 text-left">Priority</th>
-                                            <th class="py-3 px-6 text-center">Actions</th>
+                                            <th class="px-4 py-2 text-left">Name</th>
+                                            <th class="px-4 py-2 text-left">Desription</th>
+                                            <th class="px-4 py-2 text-left">Due date</th>
+                                            <th class="px-4 py-2 text-left">Status</th>
+                                            <th class="px-4 py-2 text-left">Priority</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-gray-600 text-sm">
+                                    <tbody>
                                         @foreach ($tasks as $task)
-                                        <tr class="hover:bg-gray-200">
-                                            <td>{{ $task->name }}</td>
-                                            <td>{{ $task->description }}</td>
-                                            <td>{{ $task->due_date }}</td>
-                                            <td>{{ $task->status->name }}</td>
-                                            <td>{{ $task->priority->name }}</td>
+                                        <tr class="border-t">
+                                            <td class="px-4 py-2">{{ $task->name }}</td>
+                                            <td class="px-4 py-2">{{ $task->description }}</td>
+                                            <td class="px-4 py-2">{{ $task->due_date }}</td>
+                                            <td class="px-4 py-2">{{ $task->status->name }}</td>
+                                            <td class="px-4 py-2">{{ $task->priority->name }}</td>
                                             <td class='flex justify-center items-center'>
                                                 <a href="{{ route('tasks.show', $task) }}" class="px-2 text-blue-600 hover:underline">View</a>
                                                 <a href="{{ route('tasks.edit', $task) }}" class="px-2 text-green-600 hover:underline">Edit</a>
@@ -105,16 +104,20 @@
                                                 </form>
                                             </td>
                                         </tr>
+                                        <!-- More rows -->
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
+
+                            </div>    
+
                         </div>
                     </body>
                     </html>
 
                     @else
                     <p>No task found.</p>
+                    <a href="{{ route('tasks.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Back to list</a>
                     @endif
                 </div>
             </div>
